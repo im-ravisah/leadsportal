@@ -1,0 +1,95 @@
+import type { RouteObject } from "react-router-dom";
+import { ROLES } from "../constants/roles";
+import { DashboardLayout } from "../pages/common/DashboardLayout";
+import { Dashboard } from "../pages/common/Dashboard";
+import { RoleGuard } from "../components/guards/RoleGuard";
+import { AllLeads } from "../pages/common/leads/AllLeads";
+import { PrimeProspects } from "../pages/common/leads/PrimeProspects";
+import { Partner } from "../pages/common/leads/Partner";
+import { Awarded } from "../pages/common/leads/Awarded";
+import { Delayed } from "../pages/common/leads/Delayed";
+import { WarmLeads } from "../pages/common/leads/WarmLeads";
+import { ColdLeads } from "../pages/common/leads/ColdLeads";
+import { HotLeads } from "../pages/common/leads/HotLeads";
+import { Hr } from "../pages/common/Hr";
+import { AllUsers } from "../pages/common/AllUsers";
+import { Departments } from "../pages/common/Departments";
+import { NotFound } from "../pages/common/NotFound";
+import { Profile } from "../pages/common/Profile";
+
+export const superadminRoutes: RouteObject[] = [
+  {
+    path: "/superadmin",
+    element: (
+      <RoleGuard role={ROLES.SUPERADMIN} loginPath="/auth/superadmin/login">
+        <DashboardLayout role={ROLES.SUPERADMIN} basePath="/superadmin" />
+      </RoleGuard>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard role={ROLES.SUPERADMIN} />
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard role={ROLES.SUPERADMIN} />
+      },
+      // Leads routes
+      {
+        path: "leads/all",
+        element: <AllLeads />
+      },
+      {
+        path: "leads/prime-prospects",
+        element: <PrimeProspects />
+      },
+      {
+        path: "leads/partner",
+        element: <Partner />
+      },
+      {
+        path: "leads/awarded",
+        element: <Awarded />
+      },
+      {
+        path: "leads/delayed",
+        element: <Delayed />
+      },
+      {
+        path: "leads/warm",
+        element: <WarmLeads />
+      },
+      {
+        path: "leads/cold",
+        element: <ColdLeads />
+      },
+      {
+        path: "leads/hot",
+        element: <HotLeads />
+      },
+      // HR route
+      {
+        path: "hr",
+        element: <Hr />
+      },
+      {
+        path: "profile",
+        element: <Profile role={ROLES.SUPERADMIN} />
+      },
+      // Users route
+      {
+        path: "users",
+        element: <AllUsers />
+      },
+      {
+        path: "departments",
+        element: <Departments />
+      },
+      // 404 catch-all
+      {
+        path: "*",
+        element: <NotFound role={ROLES.SUPERADMIN} basePath="/superadmin" />
+      }
+    ]
+  }
+];

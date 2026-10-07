@@ -1,0 +1,71 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { useLogin } from "../../../../services/auth";
+import { setAuthToken } from "../../../../utils/auth";
+import { ROLES } from "../../../../constants/roles";
+import { ROUTES } from "../../../../constants/routes";
+import { Button } from "../../../../components/ui/button";
+
+export function AdminLoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const login = useLogin();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    login.mutate(
+      { email, password, role: ROLES.ADMIN },
+      {
+        onSuccess: (res: any) => {
+          const token = res?.data?.tokens?.access ?? res?.data?.tokens?.access;
+          if (token) {
+            setAuthToken(ROLES.ADMIN, token);
+            navigate(ROUTES.DASHBOARD[ROLES.ADMIN]);
+          }
+        }
+      }
+    );
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 p-4">
+      <div className="w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-8 shadow-xl">
+        <h1 className="mb-2 text-2xl font-semibold">Admin Login</h1>
+        <p className="mb-6 text-sm text-muted-foreground">
+          Sign in to manage teams, leads, and pipelines.
+        </p>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="space-y-1">
+            <label className="text-sm font-medium">Email</label>
+            <input
+              type="email"
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="space-y-1">
+            <label className="text-sm font-medium">Password</label>
+            <input
+              type="password"
+              className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="flex items-center justify-end text-xs">
+            <a href="/auth/admin/forgot-password" className="text-primary hover:underline">
+              Forgot password?
+            </a>
+          </div>
+          <Button className="w-full mt-2" type="submit" disabled={login.isPending}>
+            {login.isPending ? "Signing in..." : "Sign in as Admin"}
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+}
+

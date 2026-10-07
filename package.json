@@ -1,0 +1,9 @@
+{
+  "name": "leadsportal-monorepo",
+  "private": true,
+  "packageManager": "yarn@4.12.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ]
+}

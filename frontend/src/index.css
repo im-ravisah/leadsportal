@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light mode - warm, clean, orange-accented theme */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
+
+  /* Primary brand: soft orange */
+  --primary: 24 94% 55%;
+  --primary-foreground: 210 40% 98%;
+
+  /* Subtle cards / surfaces */
+  --secondary: 40 33% 97%;
+  --secondary-foreground: 24 40% 25%;
+
+  /* Muted text and backgrounds */
+  --muted: 210 40% 97%;
+  --muted-foreground: 215 16% 42%;
+
+  /* Accent chips / badges */
+  --accent: 24 100% 97%;
+  --accent-foreground: 24 90% 40%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  /* Softer, more defined borders and inputs */
+  --border: 214 32% 92%;
+  --input: 214 32% 92%;
+  --ring: 24 94% 55%;
+
+  --radius: 0.75rem;
+}
+
+.dark {
+  /* Exact deep obsidian palette from reference image */
+  --background: 240 11% 3.5%;        /* #08090a - deep near-black background */
+  --foreground: 0 0% 98%;            /* #fafafa - crisp white text */
+  --card: 240 6% 7.2%;               /* #111215 - sleek matte card surface */
+  --card-foreground: 0 0% 98%;
+  --popover: 240 6% 8%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 220 14% 86%;            /* Slightly gray button color (#d6dae1) instead of stark white */
+  --primary-foreground: 240 10% 7%;  /* Deep obsidian text on primary buttons */
+  --secondary: 240 5% 10.5%;         /* #18191f */
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 5% 9.5%;              /* #15161c */
+  --muted-foreground: 240 5% 65%;    /* Clear, readable muted labels */
+  --accent: 240 5% 12%;              /* #1c1d24 */
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5% 13%;              /* #1e2026 - subtle dark card border */
+  --input: 240 5% 13%;
+  --ring: 0 0% 98%;
+
+  --sidebar-background: 240 10% 4.2%; /* #0a0b0d */
+  --sidebar-foreground: 0 0% 95%;
+  --sidebar-primary: 0 0% 98%;
+  --sidebar-primary-foreground: 240 10% 4%;
+  --sidebar-accent: 240 5% 11%;
+  --sidebar-accent-foreground: 0 0% 98%;
+  --sidebar-border: 240 5% 11.5%;    /* #1a1c22 */
+  --sidebar-ring: 0 0% 98%;
+}
+
+html, body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+/* Lead activity editor sizing */
+.lead-activity-editor .ql-container {
+  min-height: 200px;
+  border: none !important;
+}
+
+.lead-activity-editor .ql-editor {
+  min-height: 160px;
+}
+
+/* Hide scrollbars but keep scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
